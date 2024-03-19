@@ -18,4 +18,6 @@ public class Course {
     inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students;
 
+    private String courseName;
+
 }
