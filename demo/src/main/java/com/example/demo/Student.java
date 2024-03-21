@@ -9,7 +9,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long studentId;
+    private Long Id;
 
     private String name;
     
@@ -18,6 +18,30 @@ public class Student {
 
     public Student(String name){
         name = this.name;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long studentId) {
+        this.Id = studentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     
