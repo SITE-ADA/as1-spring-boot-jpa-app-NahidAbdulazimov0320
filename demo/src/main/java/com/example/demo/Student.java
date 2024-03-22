@@ -16,6 +16,10 @@ public class Student {
     @ManyToMany(mappedBy="students")
     private List<Course> courses;
 
+    public Student(){
+        
+    }
+
     public Student(String name){
         name = this.name;
     }

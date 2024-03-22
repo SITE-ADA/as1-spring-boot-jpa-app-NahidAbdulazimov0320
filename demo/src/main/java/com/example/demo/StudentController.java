@@ -17,7 +17,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable Long id) {
+    public Student getStudentById(@PathVariable("id") Long id) {
         return studentService.getStudentById(id);
     }
 

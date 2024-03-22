@@ -26,3 +26,7 @@ runtimeOnly 'com.h2database:h2'
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// compileJava {
+//     options.compilerArgs += ["-parameters"]
+// }
