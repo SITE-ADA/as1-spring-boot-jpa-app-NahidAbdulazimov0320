@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+    <h1>Courses</h1>
+
+    <!-- Create Course Form -->
+    <h2>Create Course</h2>
+    <form id="createCourseForm">
+        <label for="courseId">Course ID:</label>
+        <input type="number" id="createCourseId" name="courseId"><br><br>
+        <label for="courseName">Course Name:</label>
+        <input type="text" id="createCourseName" name="courseName"><br><br>
+        <label for="professor">Professor:</label>
+        <input type="text" id="createProfessor" name="professor"><br><br>
+        <button type="submit" onclick="createCourse()">Submit</button>
+    </form>
+
+
+    <!-- Get Course by ID Form -->
+    <h2>Get Course by ID</h2>
+    <form id="getCourseForm">
+        <label for="getCourseById">Enter Course ID:</label>
+        <input type="text" id="getCourseById" name="courseId"><br><br>
+        <button type="button" onclick="getCourseById()">Submit</button>
+    </form>
+    <div id="courseInfo"></div>
+
+    <!-- Update Course Form -->
+    <h2>Update Course</h2>
+    <form id="updateCourseForm">
+        <label for="updateCourseId">Course ID:</label>
+        <input type="number" id="updateCourseId" name="courseId"><br><br>
+        <label for="updateCourseName">Course Name:</label>
+        <input type="text" id="updateCourseName" name="courseName"><br><br>
+        <label for="updateProfessor">Professor:</label>
+        <input type="text" id="updateProfessor" name="professor"><br><br>
+        <button type="submit" onclick="updateCourse()">Update Course</button>
+    </form>
+
+    <!-- Delete Course Form -->
+    <h2>Delete Course</h2>
+    <form id="deleteCourseForm">
+        <label for="deleteCourseId">Enter Course ID:</label>
+        <input type="number" id="deleteCourseId" name="courseId"><br><br>
+        <button type="button" onclick="deleteCourse()">Delete Course</button>
+    </form>
+
+    <script>
+        function createCourse() {
+            const courseId = document.getElementById("createCourseId").value;
+            const courseName = document.getElementById("createCourseName").value;
+            const professor = document.getElementById("createProfessor").value;
+            const data = {
+                courseId: courseId,
+                courseName: courseName,
+                professor: professor
+            };
+
+            // Perform fetch request to create course
+            fetch('/courses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Course created successfully');
+                    } else {
+                        alert('Error creating course');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error creating course');
+                });
+        }
+
+        function getCourseById() {
+            const courseId = document.getElementById("getCourseById").value;
+
+            // Perform fetch request to get course by ID
+            fetch(`/courses/${courseId}`)
+                .then(response => response.json())
+                .then(course => {
+                    if (course) {
+                        document.getElementById("courseInfo").innerText = `Course Name: ${course.courseName}, Course ID: ${course.courseId}, Professor: ${course.professor}`;
+                    } else {
+                        document.getElementById("courseInfo").innerText = 'Course not found';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error getting course');
+                });
+        }
+
+        function updateCourse() {
+            const courseId = document.getElementById("updateCourseId").value;
+            const courseName = document.getElementById("updateCourseName").value;
+            const professor = document.getElementById("updateProfessor").value;
+            const data = {
+                courseId: courseId,
+                courseName: courseName,
+                professor: professor
+            };
+
+            // Perform fetch request to update course
+            fetch(`/courses/${courseId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Course updated successfully');
+                    } else {
+                        alert('Error updating course');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error updating course');
+                });
+        }
+        function deleteCourse() {
+    const courseId = document.getElementById("deleteCourseId").value;
+
+    // Perform fetch request to delete course
+    fetch(`/courses/${courseId}`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Course deleted successfully');
+        } else {
+            alert('Error deleting course');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error deleting course');
+    });
+}
+</script>
+</body>
+
+</html>

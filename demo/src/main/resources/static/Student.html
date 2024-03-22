@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+    <h1>Students</h1>
+
+    <!-- Create Student Form -->
+    <h2>Create Student</h2>
+    <form id="createStudentForm">
+        <label for="id">ID:</label>
+        <input type="number" id="createId" name="id"><br><br>
+        <label for="name">Name:</label>
+        <input type="text" id="createName" name="name"><br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="createAge" name="age"><br><br>
+        <label for="faculty">Faculty:</label>
+        <input type="text" id="createFaculty" name="faculty"><br><br>
+        <label for="courses">Courses :</label>
+        <input type="text" id="createCourses" name="courses"><br><br>
+        <button type="submit" onclick="createStudent()">Submit</button>
+    </form>
+
+
+    <!-- Get Student by ID Form -->
+    <h2>Get Student by ID</h2>
+    <form id="getStudentForm">
+        <label for="getById">Enter ID:</label>
+        <input type="text" id="getById" name="id"><br><br>
+        <button type="button" onclick="getStudentById()">Submit</button>
+    </form>
+    <div id="studentInfo"></div>
+
+    <!-- Update Student Form -->
+    <h2>Update Student</h2>
+    <form id="updateStudentForm">
+        <label for="id">ID:</label>
+        <input type="number" id="updateId" name="id"><br><br>
+        <label for="name">Name:</label>
+        <input type="text" id="updateName" name="name"><br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="updateAge" name="age"><br><br>
+        <label for="faculty">Faculty:</label>
+        <input type="text" id="updateFaculty" name="faculty"><br><br>
+        <label for="courses">Courses:</label>
+        <input type="text" id="createCourses" name="courses"><br><br>
+        <button type="submit" onclick="updateStudent()">Update Student</button>
+    </form>
+
+    <!-- Delete Student Form -->
+    <h2>Delete Student</h2>
+    <form id="deleteStudentForm">
+        <label for="deleteId">Enter ID:</label>
+        <input type="number" id="deleteId" name="id"><br><br>
+        <button type="button" onclick="deleteStudent()">Delete Student</button>
+    </form>
+
+    <script>
+        function createStudent() {
+            const id = document.getElementById("createId").value;
+            const name = document.getElementById("createName").value;
+            const age = document.getElementById("createAge").value;
+            const faculty = document.getElementById("createFaculty").value;
+            const courses = document.getElementById("createCourses").value.split(',').map(course => course.trim());
+            const data = {
+                id: id,
+                name: name,
+                age: age,
+                faculty: faculty,
+                courses: courses
+            };
+
+            // Perform fetch request to create student
+            fetch('/students', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Student created successfully');
+                    } else {
+                        alert('Error creating student');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error creating student');
+                });
+        }
+
+        function getStudentById() {
+            const id = document.getElementById("getById").value;
+
+            // Perform fetch request to get student by ID
+            fetch(`/students/${id}`)
+                .then(response => response.json())
+                .then(student => {
+                    if (student) {
+                        document.getElementById("studentInfo").innerText = `Name: ${student.name}, ID: ${student.id}, Age: ${student.age}, Faculty: ${student.faculty}`;
+                    } else {
+                        document.getElementById("studentInfo").innerText = 'Student not found';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error getting student');
+                });
+        }
+
+        function updateStudent() {
+            const id = document.getElementById("updateId").value;
+            const name = document.getElementById("updateName").value;
+            const age = document.getElementById("updateAge").value;
+            const faculty = document.getElementById("updateFaculty").value;
+            const courses = document.getElementById("createCourses").value.split(',').map(course => course.trim());
+            const data = {
+                id: id,
+                name: name,
+                age: age,
+                faculty: faculty,
+                course: courses
+            };
+
+            // Perform fetch request to update student
+            fetch(`/students/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Student updated successfully');
+                    } else {
+                        alert('Error updating student');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error updating student');
+                });
+        }
+
+        function deleteStudent() {
+            const id = document.getElementById("deleteId").value;
+
+            // Perform fetch request to delete student
+            fetch(`/students/${id}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Student deleted successfully');
+                    } else {
+                        alert('Error deleting student');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting student');
+                });
+        }
+    </script>
+</body>
+
+</html>

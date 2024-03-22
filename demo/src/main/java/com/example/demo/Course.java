@@ -11,32 +11,28 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long course_id;    
+    private Long course_id;    
+
+    private String course_name;
+
+    private String professor;
 
     @ManyToMany
     @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "course_id"), 
     inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students;
 
-    private String course_name;
-
-    private String professor;
+ 
 
     public long getCourseId() {
         return course_id;
     }
 
-    public void setCourseId(long courseId) {
+    public void setCourseId(Long courseId) {
         this.course_id = courseId;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
+  
 
     public String getCourseName() {
         return course_name;
@@ -54,7 +50,13 @@ public class Course {
         this.professor = professor;
     }
 
-    
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
 
 }
