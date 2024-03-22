@@ -4,23 +4,43 @@ import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name ="STUDENT")
+@Table(name = "STUDENT")
 public class Student {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
     private String name;
-    
-    @ManyToMany(mappedBy="students")
+
+    private int age;
+
+    private String faculty;
+
+    @ManyToMany(mappedBy = "students")
     private List<Course> courses;
 
-    public Student(){
-        
+    public int getAge() {
+        return age;
     }
 
-    public Student(String name){
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public Student() {
+
+    }
+
+    public Student(String name) {
         name = this.name;
     }
 
@@ -48,5 +68,4 @@ public class Student {
         this.courses = courses;
     }
 
-    
 }
