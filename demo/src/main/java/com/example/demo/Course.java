@@ -6,28 +6,28 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "course")
+@Table(name = "COURSE")
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long courseId;    
+    private long course_id;    
 
     @ManyToMany
     @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "course_id"), 
     inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students;
 
-    private String courseName;
+    private String course_name;
 
     private String professor;
 
     public long getCourseId() {
-        return courseId;
+        return course_id;
     }
 
     public void setCourseId(long courseId) {
-        this.courseId = courseId;
+        this.course_id = courseId;
     }
 
     public List<Student> getStudents() {
@@ -39,11 +39,11 @@ public class Course {
     }
 
     public String getCourseName() {
-        return courseName;
+        return course_name;
     }
 
     public void setCourseName(String courseName) {
-        this.courseName = courseName;
+        this.course_name = courseName;
     }
 
     public String getProfessor() {
