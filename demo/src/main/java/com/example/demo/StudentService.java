@@ -25,7 +25,7 @@ public class StudentService {
 
     public Student updateStudent(Long id, Student student) {
         if (studentRepository.existsById(id)) {
-            student.setId(id);
+            student.setStudentId(id);
             return studentRepository.save(student);
         }
         return null;

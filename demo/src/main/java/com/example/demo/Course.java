@@ -10,7 +10,6 @@ import jakarta.persistence.*;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long course_id;    
 
     private String course_name;
@@ -53,13 +52,13 @@ public class Course {
         this.professor = professor;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
+    // public List<Student> getStudents() {
+    //     return students;
+    // }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
+    // public void setStudents(List<Student> students) {
+    //     this.students = students;
+    // }
 
 
 }
