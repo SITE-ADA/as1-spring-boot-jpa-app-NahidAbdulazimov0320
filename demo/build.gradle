@@ -26,7 +26,9 @@ runtimeOnly 'com.h2database:h2'
 tasks.named('test') {
 	useJUnitPlatform()
 }
+apply plugin: 'java'
 
-// compileJava {
-//     options.compilerArgs += ["-parameters"]
-// }
+javadoc {
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
