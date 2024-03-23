@@ -20,6 +20,10 @@ public class Student {
     @ManyToMany(mappedBy = "students")
     private List<Course> courses;
 
+    public Student() {
+
+    }
+
     public int getAge() {
         return age;
     }
@@ -36,10 +40,7 @@ public class Student {
         this.faculty = faculty;
     }
 
-    public Student() {
-
-    }
-
+   
     public Student(String name) {
         name = this.name;
     }

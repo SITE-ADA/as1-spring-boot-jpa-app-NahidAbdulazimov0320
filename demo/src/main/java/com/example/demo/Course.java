@@ -22,6 +22,9 @@ public class Course {
     inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students;
 
+    public Course(){
+        
+    }
  
 
     public long getCourseId() {

@@ -2,8 +2,8 @@ CREATE TABLE STUDENT (
     id INT PRIMARY KEY,
     name VARCHAR(255),
    age INT,
-   faculty VARCHAR(255)
-
+   faculty VARCHAR(255),
+    course VARCHAR(255) ARRAY
 
 );
 
